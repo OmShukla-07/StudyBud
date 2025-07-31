@@ -5,7 +5,7 @@
 <style>
     .home-container {
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: 1fr 3fr 1fr;
         gap: 20px;  
     }
 </style>
@@ -13,18 +13,7 @@
 <div class="home-container">
 
     <div>
-        <h3>Browse Topics</h3>
-        <hr>
-         <div>
-                <a href="{% url 'home' %}">All</a>
-        </div>
-        {% for topic in topics %}
-            <div>
-                <a href="{% url 'home' %}?q={{ topic.name }}">{{ topic.name }}</a>
-            </div>
-        {% empty %}
-            <p>No topics available.</p>
-        {% endfor %}
+        {% include 'base/topics_component.html' %}
     </div>
 
     <div>
@@ -46,6 +35,10 @@
         {% empty %}
             <p>No rooms available.</p>
         {% endfor %}
+    </div>
+
+    <div>
+        {% include 'base/activity_component.html' %}
     </div>
 
 </div>
