@@ -1,16 +1,20 @@
-<a href="/">
-    <h1>LOGO</h1>
-</a>
+<nav>
+    <div class="container">
+        <a href="/">
+            <h1>StudyBud</h1>
+        </a>
 
-<form method="GET" action="{% url 'home' %}">
-    <input type="text" name="q" placeholder="Search Rooms..."/>
-</form>
+        <form method="GET" action="{% url 'home' %}">
+            <input type="text" name="q" placeholder="Search Rooms..."/>
+        </form>
 
-{% if user.is_authenticated %}
-<p>Hello {{request.user}}</p>
-<a href="{% url 'logout' %}">Logout</a>"
-{% else %}
-<a href="{% url 'login' %}">Login</a>"
-{% endif %}
-
-<hr>
+        <div class="nav-links">
+            {% if user.is_authenticated %}
+            <p>Hello, {{request.user}}</p>
+            <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

@@ -1,3 +1,787 @@
-body{
-    background-color: aquamarine;
-} 
+/* ========================================
+   Global Styles & Reset
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-primary: #3b82f6;
+    --color-primary-dark: #2563eb;
+    --color-primary-light: #60a5fa;
+    --color-secondary: #8b5cf6;
+    --color-success: #10b981;
+    --color-danger: #ef4444;
+    --color-warning: #f59e0b;
+    --color-dark: #1f2937;
+    --color-dark-light: #374151;
+    --color-medium: #6b7280;
+    --color-light: #e5e7eb;
+    --color-light-gray: #f3f4f6;
+    --color-white: #ffffff;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #d4e7f7 0%, #a8cde8 50%, #7cb3d9 100%);
+    background-attachment: fixed;
+    color: var(--color-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+/* ========================================
+   Container & Layout
+   ======================================== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ========================================
+   Navbar Styles - COMPACT VERSION
+   ======================================== */
+nav {
+    background-color: var(--color-white);
+    padding: 0.45rem 0;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-light);
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+nav a[href="/"] {
+    display: flex;
+    align-items: center;
+}
+
+nav h1 {
+    font-size: 1.15rem;
+    color: var(--color-primary);
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+    line-height: 1;
+}
+
+nav h1:hover {
+    color: var(--color-primary-dark);
+}
+
+nav form {
+    flex: 1;
+    max-width: 420px;
+    margin: 0 0.875rem;
+}
+
+nav form input[type="text"] {
+    width: 100%;
+    padding: 0.45rem 0.875rem;
+    border: 1px solid var(--color-light);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    background-color: #fafafa;
+    line-height: 1.2;
+}
+
+nav form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background-color: var(--color-white);
+}
+
+nav .nav-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    white-space: nowrap;
+}
+
+nav p {
+    margin: 0;
+    font-weight: 500;
+    color: var(--color-dark);
+    font-size: 0.875rem;
+    line-height: 1;
+}
+
+nav .nav-links a {
+    padding: 0.5rem 1.125rem;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    line-height: 1;
+}
+
+nav .nav-links a:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+nav hr {
+    display: none;
+}
+
+/* ========================================
+   Messages
+   ======================================== */
+.messages {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.messages li {
+    padding: 1rem 1.25rem;
+    background-color: var(--color-primary-light);
+    color: var(--color-white);
+    border-radius: var(--border-radius);
+    margin-bottom: 0.5rem;
+    box-shadow: var(--shadow-sm);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   Home Container & Grid Layout
+   ======================================== */
+.home-container {
+    display: grid;
+    grid-template-columns: 260px 1fr 300px;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .home-container {
+        grid-template-columns: 220px 1fr 280px;
+        gap: 1.25rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .home-container {
+        grid-template-columns: 200px 1fr;
+    }
+    .home-container > div:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .home-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   Card Styles (for all components)
+   ======================================== */
+.card {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card h3, .card h5 {
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+/* ========================================
+   Topics Component
+   ======================================== */
+.home-container > div:first-child {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    height: fit-content;
+    position: sticky;
+    top: 75px;
+    max-height: calc(100vh - 95px);
+    overflow-y: auto;
+}
+
+.home-container > div:first-child h3 {
+    color: var(--color-dark);
+    margin-bottom: 0.875rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.home-container > div:first-child hr {
+    border: none;
+    border-top: 2px solid var(--color-light);
+    margin-bottom: 0.875rem;
+}
+
+.home-container > div:first-child div {
+    margin-bottom: 0.5rem;
+}
+
+.home-container > div:first-child a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    color: var(--color-dark);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.home-container > div:first-child a:hover {
+    background-color: var(--color-light-gray);
+    color: var(--color-primary);
+    transform: translateX(3px);
+}
+
+/* ========================================
+   Feed Component (Rooms List)
+   ======================================== */
+.home-container > div:nth-child(2) {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.home-container > div:nth-child(2) h5 {
+    color: var(--color-medium);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.home-container > div:nth-child(2) > a {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.home-container > div:nth-child(2) > a:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.home-container > div:nth-child(2) > div > div {
+    background-color: var(--color-light-gray);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 0.875rem;
+    border-left: 3px solid var(--color-primary);
+    transition: all 0.2s ease;
+}
+
+.home-container > div:nth-child(2) > div > div:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(3px);
+    background-color: #f9fafb;
+}
+
+.home-container > div:nth-child(2) > div > div a {
+    margin-right: 0.625rem;
+    font-size: 0.85rem;
+}
+
+.home-container > div:nth-child(2) > div > div a:first-child,
+.home-container > div:nth-child(2) > div > div a:nth-child(2) {
+    background-color: var(--color-white);
+    padding: 0.25rem 0.625rem;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    color: var(--color-medium);
+    font-weight: 500;
+}
+
+.home-container > div:nth-child(2) > div > div a:first-child:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.home-container > div:nth-child(2) > div > div a:nth-child(2):hover {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+}
+
+.home-container > div:nth-child(2) > div > div h5 {
+    margin: 0.625rem 0 0.5rem 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.home-container > div:nth-child(2) > div > div small {
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    background-color: var(--color-primary-light);
+    color: var(--color-white);
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.home-container > div:nth-child(2) > div > div hr {
+    display: none;
+}
+
+.home-container > div:nth-child(2) > div > p {
+    text-align: center;
+    color: var(--color-medium);
+    padding: 2rem;
+    font-size: 1rem;
+}
+
+/* ========================================
+   Activity Component
+   ======================================== */
+.home-container > div:last-child {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+    height: fit-content;
+    position: sticky;
+    top: 75px;
+    max-height: calc(100vh - 95px);
+    overflow-y: auto;
+}
+
+.home-container > div:last-child h3 {
+    color: var(--color-dark);
+    margin-bottom: 0.875rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.home-container > div:last-child hr {
+    border: none;
+    border-top: 2px solid var(--color-light);
+    margin-bottom: 0.875rem;
+}
+
+.home-container > div:last-child > div {
+    padding: 0.875rem;
+    background-color: var(--color-light-gray);
+    border-radius: var(--border-radius);
+    margin-bottom: 0.75rem;
+}
+
+.home-container > div:last-child small {
+    display: block;
+    color: var(--color-medium);
+    font-size: 0.75rem;
+    margin-bottom: 0.375rem;
+    line-height: 1.4;
+}
+
+.home-container > div:last-child p {
+    color: var(--color-dark);
+    font-size: 0.875rem;
+    margin: 0.375rem 0;
+    line-height: 1.5;
+}
+
+.home-container > div:last-child a {
+    font-size: 0.8rem;
+    color: var(--color-danger);
+}
+
+/* ========================================
+   Room Container & Detail Page
+   ======================================== */
+.room-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .room-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.room-container > div:first-child {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.room-container > div:first-child h1 {
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+.room-container > div:first-child p {
+    color: var(--color-medium);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.comment-wrapper {
+    background-color: var(--color-light-gray);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+}
+
+.comment-wrapper h3 {
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+.comment-wrapper hr {
+    border: none;
+    border-top: 2px solid var(--color-light);
+    margin-bottom: 1rem;
+}
+
+.comment-wrapper > div {
+    background-color: var(--color-white);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+}
+
+.comment-wrapper small {
+    color: var(--color-medium);
+    font-weight: 500;
+}
+
+.comment-wrapper p {
+    color: var(--color-dark);
+    margin: 0.75rem 0 0.5rem 0;
+}
+
+.comment-wrapper a {
+    font-size: 0.85rem;
+    color: var(--color-danger);
+}
+
+.comment-form form {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.comment-form input[type="text"] {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--color-light);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.comment-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.room-container > div:last-child {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    height: fit-content;
+    position: sticky;
+    top: 70px;
+}
+
+.room-container > div:last-child h3 {
+    color: var(--color-dark);
+    margin-bottom: 1rem;
+}
+
+.room-container > div:last-child hr {
+    border: none;
+    border-top: 2px solid var(--color-light);
+    margin-bottom: 1rem;
+}
+
+.room-container > div:last-child > div {
+    padding: 0.75rem;
+    background-color: var(--color-light-gray);
+    border-radius: var(--border-radius);
+    margin-bottom: 0.75rem;
+}
+
+.room-container > div:last-child p {
+    color: var(--color-dark);
+    font-weight: 500;
+}
+
+/* ========================================
+   Profile Container
+   ======================================== */
+.profile-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.profile-container h1 {
+    grid-column: 1 / -1;
+    color: var(--color-dark);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .profile-container {
+        grid-template-columns: 1fr 2fr;
+    }
+    .profile-container > div:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================
+   Forms Styling
+   ======================================== */
+form {
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+form label {
+    display: block;
+    color: var(--color-dark);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--color-light);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+form input[type="text"]:focus,
+form input[type="password"]:focus,
+form input[type="email"]:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+form input[type="submit"] {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 0.875rem 2rem;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+form input[type="submit"]:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+form p {
+    text-align: center;
+    color: var(--color-medium);
+    margin-top: 1.5rem;
+}
+
+form p + a {
+    display: block;
+    text-align: center;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+/* ========================================
+   Buttons & Links
+   ======================================== */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+}
+
+.btn-danger:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+@media screen and (max-width: 768px) {
+    nav {
+        padding: 0.75rem 0;
+    }
+
+    nav .container {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+    
+    nav h1 {
+        font-size: 1.25rem;
+    }
+
+    nav form {
+        order: 3;
+        flex: 1 1 100%;
+        margin: 0;
+        max-width: 100%;
+    }
+    
+    nav .nav-links {
+        gap: 0.75rem;
+    }
+
+    nav .nav-links p {
+        display: none;
+    }
+
+    nav .nav-links a {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .home-container,
+    .room-container,
+    .profile-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .home-container > div:first-child,
+    .home-container > div:last-child {
+        position: relative;
+        top: 0;
+        max-height: none;
+    }
+    
+    form {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+}

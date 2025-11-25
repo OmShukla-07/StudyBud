@@ -6,14 +6,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css"  href="{% static 'styles/main.css' %}">
-    <title>StudyBud</title>
+    <link rel="stylesheet" type="text/css"  href="{% static 'styles/main.css' %}?v=10">
+    <title>StudyBud - Study Together</title>
 </head>
 <body>
+    {% include 'navbar.html' %}
+
     <div class="container">
-
-        {% include 'navbar.html' %}
-
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -21,6 +20,7 @@
             {% endfor %}
         </ul>
         {% endif %}
+        
         {% block content %}
         {% endblock %}
     </div>
